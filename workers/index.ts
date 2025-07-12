@@ -34,6 +34,28 @@ function generateId(): string {
   return Math.random().toString(36).substring(2) + Date.now().toString(36)
 }
 
+const DEFAULT_MODELS = [
+  { id: 'mistralai/mistral-small-3.2-24b-instruct:free', name: 'Mistral Small 3.2 24B (Free)', provider: 'Mistral AI', isFree: true },
+  { id: 'moonshotai/kimi-dev-72b:free', name: 'Kimi Dev 72B (Free)', provider: 'Moonshot AI', isFree: true },
+  { id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 (Free)', provider: 'DeepSeek', isFree: true },
+  { id: 'qwen/qwen3-32b:free', name: 'Qwen 3 32B (Free)', provider: 'Qwen', isFree: true },
+  { id: 'google/gemini-2.5-pro-exp-03-25', name: 'Gemini 2.5 Pro (Free)', provider: 'Google', isFree: true },
+  { id: 'google/gemini-1.5-flash:free', name: 'Gemini 1.5 Flash (Free)', provider: 'Google', isFree: true }
+]
+
+const PAID_MODELS = [
+  { id: 'openai/gpt-4o', name: 'GPT-4o (Paid)', provider: 'OpenAI', isFree: false },
+  { id: 'anthropic/claude-3-5-sonnet', name: 'Claude 3.5 Sonnet (Paid)', provider: 'Anthropic', isFree: false },
+  { id: 'openai/gpt-4o-mini', name: 'GPT-4o Mini (Paid)', provider: 'OpenAI', isFree: false },
+  { id: 'anthropic/claude-3-5-haiku', name: 'Claude 3.5 Haiku (Paid)', provider: 'Anthropic', isFree: false },
+  { id: 'google/gemini-1.5-pro', name: 'Gemini 1.5 Pro (Paid)', provider: 'Google', isFree: false },
+  { id: 'meta-llama/llama-3.1-70b-instruct', name: 'Llama 3.1 70B Instruct (Paid)', provider: 'Meta', isFree: false },
+  { id: 'openai/gpt-4-turbo', name: 'GPT-4 Turbo (Paid)', provider: 'OpenAI', isFree: false },
+  { id: 'anthropic/claude-3-opus', name: 'Claude 3 Opus (Paid)', provider: 'Anthropic', isFree: false },
+  { id: 'google/gemini-1.5-flash', name: 'Gemini 1.5 Flash (Paid)', provider: 'Google', isFree: false },
+  { id: 'meta-llama/llama-3.1-405b-instruct', name: 'Llama 3.1 405B Instruct (Paid)', provider: 'Meta', isFree: false }
+]
+
 // CORS headers
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -268,27 +290,7 @@ async function handleModels(request: Request) {
     const url = new URL(request.url)
     const apiKey = url.searchParams.get('apiKey')
 
-    const DEFAULT_MODELS = [
-      { id: 'mistralai/mistral-small-3.2-24b-instruct:free', name: 'Mistral Small 3.2 24B (Free)', provider: 'Mistral AI', isFree: true },
-      { id: 'moonshotai/kimi-dev-72b:free', name: 'Kimi Dev 72B (Free)', provider: 'Moonshot AI', isFree: true },
-      { id: 'deepseek/deepseek-r1:free', name: 'DeepSeek R1 (Free)', provider: 'DeepSeek', isFree: true },
-      { id: 'qwen/qwen3-32b:free', name: 'Qwen 3 32B (Free)', provider: 'Qwen', isFree: true },
-      { id: 'google/gemini-2.5-pro-exp-03-25', name: 'Gemini 2.5 Pro (Free)', provider: 'Google', isFree: true },
-      { id: 'google/gemini-1.5-flash:free', name: 'Gemini 1.5 Flash (Free)', provider: 'Google', isFree: true }
-    ]
 
-    const PAID_MODELS = [
-      { id: 'openai/gpt-4o', name: 'GPT-4o (Paid)', provider: 'OpenAI', isFree: false },
-      { id: 'anthropic/claude-3-5-sonnet', name: 'Claude 3.5 Sonnet (Paid)', provider: 'Anthropic', isFree: false },
-      { id: 'openai/gpt-4o-mini', name: 'GPT-4o Mini (Paid)', provider: 'OpenAI', isFree: false },
-      { id: 'anthropic/claude-3-5-haiku', name: 'Claude 3.5 Haiku (Paid)', provider: 'Anthropic', isFree: false },
-      { id: 'google/gemini-1.5-pro', name: 'Gemini 1.5 Pro (Paid)', provider: 'Google', isFree: false },
-      { id: 'meta-llama/llama-3.1-70b-instruct', name: 'Llama 3.1 70B Instruct (Paid)', provider: 'Meta', isFree: false },
-      { id: 'openai/gpt-4-turbo', name: 'GPT-4 Turbo (Paid)', provider: 'OpenAI', isFree: false },
-      { id: 'anthropic/claude-3-opus', name: 'Claude 3 Opus (Paid)', provider: 'Anthropic', isFree: false },
-      { id: 'google/gemini-1.5-flash', name: 'Gemini 1.5 Flash (Paid)', provider: 'Google', isFree: false },
-      { id: 'meta-llama/llama-3.1-405b-instruct', name: 'Llama 3.1 405B Instruct (Paid)', provider: 'Meta', isFree: false }
-    ]
 
     if (!apiKey) {
       return new Response(JSON.stringify({
