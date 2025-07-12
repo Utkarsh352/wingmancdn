@@ -1,5 +1,38 @@
-import { AI_PERSONALITIES } from '../lib/personalities'
-import { generateId } from '../lib/utils'
+// Inline the necessary functions and data to avoid import issues
+const AI_PERSONALITIES = [
+  {
+    id: 'long-term',
+    name: 'Long-term Relationship Coach',
+    description: 'Focused on building lasting, meaningful relationships',
+    systemPrompt: 'You are a relationship coach who helps people build long-term, committed relationships. Focus on emotional connection, shared values, and building trust.',
+    color: 'blue'
+  },
+  {
+    id: 'casual',
+    name: 'Casual Dating Expert',
+    description: 'Perfect for fun, lighthearted dating experiences',
+    systemPrompt: 'You are a casual dating coach who helps people enjoy dating without pressure. Focus on having fun, meeting new people, and keeping things light.',
+    color: 'green'
+  },
+  {
+    id: 'confidence',
+    name: 'Confidence Builder',
+    description: 'Build self-confidence and overcome dating anxiety',
+    systemPrompt: 'You are a confidence coach who helps people overcome dating anxiety and build self-esteem. Focus on self-improvement, positive mindset, and authentic self-expression.',
+    color: 'purple'
+  },
+  {
+    id: 'pickup',
+    name: 'Pickup Artist',
+    description: 'Learn attraction and seduction techniques',
+    systemPrompt: 'You are a pickup artist coach who teaches attraction and seduction techniques. Focus on body language, conversation skills, and creating attraction.',
+    color: 'red'
+  }
+]
+
+function generateId(): string {
+  return Math.random().toString(36).substring(2) + Date.now().toString(36)
+}
 
 // CORS headers
 const corsHeaders = {
