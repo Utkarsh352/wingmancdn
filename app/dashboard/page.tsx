@@ -176,7 +176,7 @@ export default function DashboardPage() {
       if (!apiKey) return
       
       try {
-        const response = await fetch(`/api/models?apiKey=${encodeURIComponent(apiKey)}`)
+        const response = await fetch(`https://wingman-ai.naamjaankrkyamilega.workers.dev/api/models?apiKey=${encodeURIComponent(apiKey)}`)
         if (response.ok) {
           const data = await response.json()
           setAvailableModels(data.models)
@@ -409,7 +409,7 @@ export default function DashboardPage() {
     }))
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://wingman-ai.naamjaankrkyamilega.workers.dev/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -466,7 +466,7 @@ export default function DashboardPage() {
     })) || []
 
     try {
-      const response = await fetch('/api/reply', {
+      const response = await fetch('https://wingman-ai.naamjaankrkyamilega.workers.dev/api/reply', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
