@@ -1,4 +1,4 @@
-name = "wingman-ai"
+name = "wingman-ai-cdn"
 compatibility_date = "2024-01-01"
 main = "src/index.ts"
 
