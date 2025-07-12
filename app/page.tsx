@@ -23,7 +23,7 @@ import {
   Clock,
   Smartphone
 } from 'lucide-react'
-import { cn, validateApiKey } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 
 export default function LandingPage() {
   const [apiKey, setApiKey] = useState('')
@@ -33,9 +33,9 @@ export default function LandingPage() {
   const router = useRouter()
 
   useEffect(() => {
-    // Check if user already has a valid API key
+    // Check if user already has an API key
     const savedApiKey = localStorage.getItem('wingman-api-key')
-    if (savedApiKey && validateApiKey(savedApiKey)) {
+    if (savedApiKey) {
       router.push('/dashboard')
     }
   }, [router])
@@ -45,21 +45,22 @@ export default function LandingPage() {
     setError('')
     setIsValidating(true)
 
-    if (!validateApiKey(apiKey)) {
-      setError('Please enter a valid OpenRouter API key (starts with sk-)')
+    if (!apiKey.trim()) {
+      setError('Please enter your OpenRouter API key')
       setIsValidating(false)
       return
     }
 
     try {
-      // Test the API key by fetching models
-      const response = await fetch(`/api/models?apiKey=${encodeURIComponent(apiKey)}`)
+      // Test the API key by fetching models from Workers API
+      const response = await fetch(`https://wingman-ai.naamjaankrkyamilega.workers.dev/api/models?apiKey=${encodeURIComponent(apiKey)}`)
       
       if (response.ok) {
         localStorage.setItem('wingman-api-key', apiKey)
         router.push('/dashboard')
       } else {
-        setError('Invalid API key. Please check your OpenRouter API key.')
+        const errorData = await response.json()
+        setError(errorData.error || 'Invalid API key. Please check your OpenRouter API key.')
       }
     } catch (err) {
       setError('Failed to validate API key. Please try again.')

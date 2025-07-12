@@ -34,7 +34,7 @@ import {
   ChevronDown,
   MessageSquare as ChatIcon
 } from 'lucide-react'
-import { cn, formatTimestamp, copyToClipboard, validateApiKey, generateId } from '@/lib/utils'
+import { cn, formatTimestamp, copyToClipboard, generateId } from '@/lib/utils'
 import { AI_PERSONALITIES } from '@/lib/personalities'
 import type { Message, Person, ChatMessage, ChatConversation, AIPersonality, PersonTab, PersonWithTabs, Model } from '@/types'
 
@@ -94,7 +94,7 @@ export default function DashboardPage() {
     const savedDarkMode = localStorage.getItem('wingman-dark-mode')
     const savedExpandedPeople = localStorage.getItem('wingman-expanded-people')
 
-    if (!savedApiKey || !validateApiKey(savedApiKey)) {
+    if (!savedApiKey) {
       router.push('/')
       return
     }
