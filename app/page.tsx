@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { 
-  Bot, 
+  Heart, 
   MessageSquare, 
   Zap, 
   Shield, 
@@ -12,12 +12,22 @@ import {
   CheckCircle,
   Star,
   Users,
-  Globe
+  Globe,
+  Target,
+  TrendingUp,
+  Key,
+  Eye,
+  EyeOff,
+  Play,
+  Award,
+  Clock,
+  Smartphone
 } from 'lucide-react'
 import { cn, validateApiKey } from '@/lib/utils'
 
 export default function LandingPage() {
   const [apiKey, setApiKey] = useState('')
+  const [showApiKey, setShowApiKey] = useState(false)
   const [isValidating, setIsValidating] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -26,7 +36,7 @@ export default function LandingPage() {
     // Check if user already has a valid API key
     const savedApiKey = localStorage.getItem('wingman-api-key')
     if (savedApiKey && validateApiKey(savedApiKey)) {
-      router.push('/chat')
+      router.push('/dashboard')
     }
   }, [router])
 
@@ -47,7 +57,7 @@ export default function LandingPage() {
       
       if (response.ok) {
         localStorage.setItem('wingman-api-key', apiKey)
-        router.push('/chat')
+        router.push('/dashboard')
       } else {
         setError('Invalid API key. Please check your OpenRouter API key.')
       }
@@ -60,53 +70,95 @@ export default function LandingPage() {
 
   const features = [
     {
-      icon: <Bot className="w-6 h-6" />,
-      title: 'Multiple AI Models',
-      description: 'Access GPT-4, Claude, Llama, Mistral, and more through OpenRouter'
+      icon: <Heart className="w-8 h-8" />,
+      title: 'Dating Strategy',
+      description: 'Get personalized advice on approaching, flirting, and building attraction',
+      gradient: 'from-pink-500 to-red-500'
     },
     {
-      icon: <MessageSquare className="w-6 h-6" />,
-      title: 'Smart Conversations',
-      description: 'Engage in natural conversations with advanced language models'
+      icon: <MessageSquare className="w-8 h-8" />,
+      title: 'Conversation Skills',
+      description: 'Learn how to have engaging conversations and create emotional connections',
+      gradient: 'from-purple-500 to-pink-500'
     },
     {
-      icon: <Zap className="w-6 h-6" />,
-      title: 'Lightning Fast',
-      description: 'Get instant responses with optimized API routing'
+      icon: <Target className="w-8 h-8" />,
+      title: 'Confidence Building',
+      description: 'Develop self-confidence and overcome dating anxiety with proven techniques',
+      gradient: 'from-blue-500 to-purple-500'
     },
     {
-      icon: <Shield className="w-6 h-6" />,
-      title: 'Secure & Private',
-      description: 'Your API keys stay local, conversations are private'
+      icon: <TrendingUp className="w-8 h-8" />,
+      title: 'Relationship Growth',
+      description: 'Navigate relationships, handle conflicts, and build lasting connections',
+      gradient: 'from-green-500 to-blue-500'
     }
   ]
 
   const stats = [
-    { label: 'AI Models', value: '8+' },
-    { label: 'Response Time', value: '<2s' },
-    { label: 'Uptime', value: '99.9%' }
+    { label: 'Success Stories', value: '10,000+', icon: <Award className="w-5 h-5" /> },
+    { label: 'Dating Tips', value: '500+', icon: <Star className="w-5 h-5" /> },
+    { label: 'Confidence Boost', value: '95%', icon: <TrendingUp className="w-5 h-5" /> },
+    { label: 'Active Users', value: '5,000+', icon: <Users className="w-5 h-5" /> }
+  ]
+
+  const benefits = [
+    {
+      icon: <Clock className="w-6 h-6" />,
+      title: '24/7 Availability',
+      description: 'Get dating advice anytime, anywhere'
+    },
+    {
+      icon: <Smartphone className="w-6 h-6" />,
+      title: 'Mobile Friendly',
+      description: 'Works perfectly on all your devices'
+    },
+    {
+      icon: <Shield className="w-6 h-6" />,
+      title: 'Private & Secure',
+      description: 'Your conversations stay confidential'
+    },
+    {
+      icon: <Zap className="w-6 h-6" />,
+      title: 'Instant Responses',
+      description: 'Get advice in real-time'
+    }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-red-50 to-purple-100 dark:from-gray-900 dark:via-purple-900 dark:to-pink-900 relative overflow-hidden">
+      {/* Background Decorations */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-pink-400/20 to-red-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-yellow-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
+      </div>
+
       {/* Header */}
       <header className="relative z-10">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-                <Bot className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-red-500 rounded-2xl flex items-center justify-center shadow-lg">
+                <Heart className="w-7 h-7 text-white" />
               </div>
-              <span className="text-2xl font-bold text-gradient">Wingman AI</span>
+              <div>
+                <span className="text-3xl font-bold bg-gradient-to-r from-pink-600 to-red-600 bg-clip-text text-transparent">
+                  Wingman AI
+                </span>
+                <p className="text-sm text-gray-600 dark:text-gray-400 -mt-1">Your Dating Coach</p>
+              </div>
             </div>
+            
             <div className="flex items-center space-x-4">
               <a 
                 href="https://openrouter.ai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="flex items-center space-x-2 px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-all duration-200 hover:bg-white dark:hover:bg-gray-800 shadow-sm"
               >
-                Powered by OpenRouter
+                <Globe className="w-4 h-4" />
+                <span className="text-sm font-medium">Powered by OpenRouter</span>
               </a>
             </div>
           </div>
@@ -117,84 +169,118 @@ export default function LandingPage() {
       <main className="relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
           <div className="text-center">
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <Sparkles className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                The Ultimate AI Chat Experience
-              </span>
+            <div className="flex items-center justify-center space-x-2 mb-8">
+              <div className="px-4 py-2 bg-gradient-to-r from-pink-500/10 to-red-500/10 rounded-full border border-pink-200 dark:border-pink-800">
+                <span className="text-sm font-medium text-pink-700 dark:text-pink-300 flex items-center space-x-2">
+                  <Sparkles className="w-4 h-4" />
+                  <span>Your Personal Dating Coach & Wingman</span>
+                </span>
+              </div>
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              Your AI
-              <span className="text-gradient"> Conversation </span>
-              Partner
+            <h1 className="text-6xl md:text-7xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+              Master Your
+              <span className="bg-gradient-to-r from-pink-600 to-red-600 bg-clip-text text-transparent"> Dating Life </span>
+              <br />
+              with AI
             </h1>
             
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-              Experience the power of multiple AI models in one beautiful, intuitive interface. 
-              Chat with GPT-4, Claude, Llama, and more through OpenRouter.
+            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+              Get personalized dating advice, conversation starters, and relationship strategies from your AI wingman. 
+              Learn how to attract, connect, and build meaningful relationships.
             </p>
 
             {/* API Key Form */}
-            <div className="max-w-md mx-auto mb-12">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="apiKey" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    OpenRouter API Key
-                  </label>
-                  <input
-                    id="apiKey"
-                    type="password"
-                    value={apiKey}
-                    onChange={(e) => setApiKey(e.target.value)}
-                    placeholder="sk-..."
-                    className="input-field"
-                    required
-                  />
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    Get your free API key from{' '}
-                    <a 
-                      href="https://openrouter.ai/keys" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-700 dark:text-blue-400"
-                    >
-                      openrouter.ai
-                    </a>
+            <div className="max-w-lg mx-auto mb-16">
+              <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-white/20 dark:border-gray-700/50">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <Key className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    Get Started in Seconds
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Enter your OpenRouter API key to access free AI models for your dating journey
                   </p>
                 </div>
-                
-                {error && (
-                  <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                    <p className="text-red-700 dark:text-red-400 text-sm">{error}</p>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="apiKey" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                      OpenRouter API Key
+                    </label>
+                    <div className="relative">
+                      <Key className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <input
+                        id="apiKey"
+                        type={showApiKey ? "text" : "password"}
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                        placeholder="sk-..."
+                        className="w-full pl-12 pr-12 py-4 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                        required
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowApiKey(!showApiKey)}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                      >
+                        {showApiKey ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      </button>
+                    </div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                      Get your free API key from{' '}
+                      <a 
+                        href="https://openrouter.ai/keys" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-pink-600 hover:text-pink-700 dark:text-pink-400 font-medium underline"
+                      >
+                        openrouter.ai
+                      </a>
+                      {' '}• We only use free models
+                    </p>
                   </div>
-                )}
-                
-                <button
-                  type="submit"
-                  disabled={isValidating || !apiKey}
-                  className="w-full btn-primary flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isValidating ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Validating...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Start Chatting</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
+                  
+                  {error && (
+                    <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl">
+                      <p className="text-red-700 dark:text-red-400 text-sm">{error}</p>
+                    </div>
                   )}
-                </button>
-              </form>
+                  
+                  <button
+                    type="submit"
+                    disabled={isValidating || !apiKey}
+                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 hover:from-pink-600 hover:to-red-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  >
+                    {isValidating ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Validating...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-5 h-5" />
+                        <span>Start Your Dating Journey</span>
+                        <ArrowRight className="w-5 h-5" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
             </div>
 
             {/* Stats */}
-            <div className="flex items-center justify-center space-x-8 mb-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
               {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
+                <div key={index} className="text-center group">
+                  <div className="w-16 h-16 bg-gradient-to-r from-pink-500/10 to-red-500/10 rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform duration-200">
+                    <div className="text-pink-600 dark:text-pink-400">
+                      {stat.icon}
+                    </div>
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{stat.value}</div>
                   <div className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</div>
                 </div>
               ))}
@@ -203,13 +289,13 @@ export default function LandingPage() {
         </div>
 
         {/* Features Section */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Why Choose Wingman AI?
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              What Can Your AI Wingman Help You With?
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              Everything you need for the perfect AI chat experience
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Everything you need to transform your dating life and build better relationships
             </p>
           </div>
           
@@ -217,17 +303,17 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="card p-6 text-center hover:shadow-lg transition-shadow duration-200"
+                className="group relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 border border-white/20 dark:border-gray-700/50 hover:-translate-y-2"
               >
-                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <div className="text-blue-600 dark:text-blue-400">
+                <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-200`}>
+                  <div className="text-white">
                     {feature.icon}
                   </div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                <p className="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -235,56 +321,131 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <div className="card p-8">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-              Ready to Start?
+        {/* Benefits Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              Why Choose Wingman AI?
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-              Join thousands of users who are already experiencing the future of AI conversations
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Experience the future of dating advice with cutting-edge AI technology
             </p>
-            <div className="flex items-center justify-center space-x-4">
-              <div className="flex items-center space-x-1">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-300">Free to use</span>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {benefits.map((benefit, index) => (
+              <div 
+                key={index}
+                className="text-center group"
+              >
+                <div className="w-20 h-20 bg-gradient-to-r from-pink-500/10 to-red-500/10 rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-200">
+                  <div className="text-pink-600 dark:text-pink-400">
+                    {benefit.icon}
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {benefit.description}
+                </p>
               </div>
-              <div className="flex items-center space-x-1">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-300">No registration</span>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <div className="bg-gradient-to-r from-pink-500 to-red-500 rounded-3xl p-12 text-white relative overflow-hidden">
+            {/* Background decoration */}
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 to-red-600/20"></div>
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            
+            <div className="relative z-10">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Ready to Transform Your Dating Life?
+              </h2>
+              <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+                Join thousands of users who are already improving their relationships with AI-powered dating advice
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="flex items-center justify-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-300" />
+                  <span className="text-lg font-medium">Personalized advice</span>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-300" />
+                  <span className="text-lg font-medium">24/7 availability</span>
+                </div>
+                <div className="flex items-center justify-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-300" />
+                  <span className="text-lg font-medium">Proven strategies</span>
+                </div>
               </div>
-              <div className="flex items-center space-x-1">
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-gray-600 dark:text-gray-300">Instant access</span>
-              </div>
+              <button
+                onClick={() => document.getElementById('apiKey')?.focus()}
+                className="bg-white text-pink-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-2xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Get Started Now
+              </button>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-gray-200 dark:border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Bot className="w-5 h-5 text-white" />
+      <footer className="relative z-10 border-t border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-red-500 rounded-xl flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <span className="text-xl font-bold bg-gradient-to-r from-pink-600 to-red-600 bg-clip-text text-transparent">
+                    Wingman AI
+                  </span>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Your AI Dating Coach</p>
+                </div>
               </div>
-              <span className="text-lg font-semibold text-gradient">Wingman AI</span>
+              <p className="text-gray-600 dark:text-gray-300">
+                Transform your dating life with personalized AI-powered advice and strategies.
+              </p>
             </div>
             
-            <div className="flex items-center space-x-6 text-sm text-gray-600 dark:text-gray-300">
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Features</h3>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
+                <li>• Dating Strategy</li>
+                <li>• Conversation Skills</li>
+                <li>• Confidence Building</li>
+                <li>• Relationship Growth</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Powered By</h3>
               <a 
                 href="https://openrouter.ai" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
               >
-                Powered by OpenRouter
+                <Globe className="w-5 h-5" />
+                <span>OpenRouter AI</span>
               </a>
-              <span>•</span>
-              <span>Built with Next.js & Tailwind</span>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                Access to the world's best AI models
+              </p>
             </div>
+          </div>
+          
+          <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center">
+            <p className="text-gray-500 dark:text-gray-400">
+              © 2024 Wingman AI. Your personal dating coach powered by artificial intelligence.
+            </p>
           </div>
         </div>
       </footer>

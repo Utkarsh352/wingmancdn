@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AI_PERSONALITIES } from '@/lib/personalities'
 import { generateId } from '@/lib/utils'
-import type { CoachRequest, ApiError } from '@/types'
+import type { ReplyRequest, ApiError } from '@/types'
 
 const OPENROUTER_BASE_URL = 'https://openrouter.ai/api/v1'
 
 export async function POST(request: NextRequest) {
   try {
-    const body: CoachRequest = await request.json()
+    const body: ReplyRequest = await request.json()
     const { message, personality, context, apiKey, model = 'mistralai/mistral-7b-instruct', conversationHistory = [] } = body
 
     if (!message || !personality || !apiKey) {
@@ -23,27 +23,27 @@ export async function POST(request: NextRequest) {
       }, { status: 400 })
     }
 
-    const systemPrompt = `You are a dating coach. I'll tell you about the girl, analyze and guide me on it.
+    const systemPrompt = `You are a reply generator. I'll tell you her texts, generate a suitable, brief reply to her texts so she stays interested in me.
 
 Personality: ${selectedPersonality.name}
 ${selectedPersonality.systemPrompt}
 
 IMPORTANT:
-- Give practical, actionable advice
-- Be direct and honest
-- Analyze the situation clearly
-- Provide specific guidance
-- Stay true to the ${selectedPersonality.name} approach
-- Remember our previous conversation and build on it
+- Keep replies brief and natural (1-2 sentences max)
+- Be confident, not desperate
+- Match her energy level
+- Stay true to the ${selectedPersonality.name} personality
+- Don't be overly eager or pushy
+- Remember the conversation context and build on previous messages
 
 Context: ${context || 'No additional context provided'}
 
 Previous conversation:
-${conversationHistory.length > 0 ? conversationHistory.map(msg => `${msg.role === 'user' ? 'You' : 'Coach'}: ${msg.content}`).join('\n') : 'No previous conversation'}
+${conversationHistory.length > 0 ? conversationHistory.map(msg => `${msg.role === 'user' ? 'You' : 'Her'}: ${msg.content}`).join('\n') : 'No previous conversation'}
 
-My question: "${message}"
+Her message: "${message}"
 
-Analyze and guide me:`
+Generate a brief, confident reply:`
 
     const response = await fetch(`${OPENROUTER_BASE_URL}/chat/completions`, {
       method: 'POST',
@@ -66,8 +66,8 @@ Analyze and guide me:`
             content: message
           }
         ],
-        max_tokens: 1000,
-        temperature: 0.7
+        max_tokens: 200,
+        temperature: 0.8
       })
     })
 
@@ -75,22 +75,22 @@ Analyze and guide me:`
       const errorData = await response.json()
       console.error('OpenRouter API error:', errorData)
       return NextResponse.json<ApiError>({
-        error: errorData.error?.message || 'Failed to get response from AI'
+        error: errorData.error?.message || 'Failed to generate reply'
       }, { status: response.status })
     }
 
     const data = await response.json()
-    const aiResponse = data.choices[0]?.message?.content || 'Sorry, I could not generate a response.'
+    const reply = data.choices[0]?.message?.content?.trim() || 'Sorry, I could not generate a reply.'
 
     return NextResponse.json({
       id: generateId(),
-      response: aiResponse,
+      reply: reply,
       model: model,
       timestamp: new Date().toISOString()
     })
 
   } catch (error) {
-    console.error('Chat API error:', error)
+    console.error('Reply API error:', error)
     return NextResponse.json<ApiError>({
       error: 'Internal server error'
     }, { status: 500 })
