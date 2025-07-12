@@ -39,7 +39,7 @@ export function copyToClipboard(text: string): Promise<boolean> {
 }
 
 export function validateApiKey(apiKey: string): boolean {
-  return apiKey.length > 0 && apiKey.startsWith('sk-')
+  return apiKey.length > 0 && (apiKey.startsWith('sk-') || apiKey.startsWith('sk-or-'))
 }
 
 export const DEFAULT_MODELS = [
