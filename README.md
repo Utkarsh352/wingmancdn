@@ -1,20 +1,38 @@
-# Wingman AI - Your AI Conversation Partner
+# Wingman AI - Your AI Dating Coach & Reply Generator
 
-A modern, responsive AI chat application built with **Next.js 14**, React, and Tailwind CSS. Wingman AI supports multiple large language models (LLMs) through OpenRouter, providing a seamless conversational experience with local storage for conversation history.
+A comprehensive dating app built with **Next.js 14**, React, and Tailwind CSS. Wingman AI provides two main features: an AI dating coach with multiple personalities and a reply generator for conversations, all using **free AI models** via OpenRouter.
 
 ## ✨ Features
 
-- 🎨 **Beautiful Landing Page**: Stunning design with API key authentication flow
-- 🤖 **Multiple AI Models**: Support for GPT-4, Claude, Llama, Mistral, Gemini, Grok, and more via OpenRouter
-- 💬 **Real-time Chat**: Clean, minimalistic chat interface with typing indicators
-- 🌙 **Dark/Light Mode**: Toggle between dark and light themes
-- 💾 **Local Storage**: Conversation history persists across browser sessions
-- 📱 **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- 🔐 **Secure Authentication**: API key validation before accessing the chat
-- ⚙️ **Settings Panel**: Easy configuration of API keys and model preferences
-- 📋 **Copy to Clipboard**: One-click copying of AI responses
-- 🔄 **Model Switching**: Seamlessly switch between different AI models
-- 🎨 **Modern UI**: Beautiful interface built with Tailwind CSS and Lucide icons
+### 🎯 Two Main Features
+
+#### 1. **AI Dating Coach**
+- **Multiple AI Personalities**: Choose from 5 different dating mindsets
+  - Long Term (Marry Her) - Focused on serious relationships
+  - Go With The Flow - Casual, natural dating approach
+  - Short Term - Meaningful but not long-term relationships
+  - Hookup - Casual physical relationships
+  - One Night Stand - Single encounter relationships
+- **Personalized Advice**: Get coaching tailored to your dating goals
+- **Conversation History**: All coaching sessions are saved locally
+- **Copy Responses**: One-click copying of AI advice
+
+#### 2. **Reply Generator**
+- **Multiple People Tabs**: Manage conversations with different people
+- **Text Message UI**: Chat interface that looks like real text messages
+- **AI-Generated Replies**: Get contextual replies based on your chosen personality
+- **Conversation History**: Track all conversations with each person
+- **Easy Message Input**: Paste their messages and get instant replies
+
+### 🎨 Additional Features
+
+- **Beautiful Landing Page**: Stunning design with API key authentication
+- **Conversation Management**: Add and manage multiple people
+- **Local Storage**: All data persists across browser sessions
+- **Dark/Light Mode**: Toggle between themes
+- **Responsive Design**: Works perfectly on all devices
+- **Settings Panel**: Easy configuration of API keys and personalities
+- **Free Models Only**: Uses only free AI models via OpenRouter
 
 ## 🚀 Quick Start
 
@@ -49,51 +67,42 @@ A modern, responsive AI chat application built with **Next.js 14**, React, and T
    - Visit [openrouter.ai/keys](https://openrouter.ai/keys)
    - Sign up for a free account
    - Create a new API key
-   - Enter it on the landing page to start chatting!
-
-## 🔧 Configuration
-
-### Environment Variables
-
-| Variable | Description | Required | Default |
-|----------|-------------|----------|---------|
-| `OPENROUTER_API_KEY` | Your OpenRouter API key (optional - users can provide their own) | No | - |
-| `NODE_ENV` | Environment mode | No | development |
-
-### Getting an OpenRouter API Key
-
-1. Visit [openrouter.ai](https://openrouter.ai)
-2. Sign up for a free account
-3. Navigate to the API Keys section
-4. Create a new API key
-5. Copy the key and enter it on the landing page
+   - Enter it on the landing page to start your dating journey!
 
 ## 📱 Usage
 
 ### Landing Page
 
 1. **Enter your API key** on the beautiful landing page
-2. **Click "Start Chatting"** to validate and proceed
-3. **Get redirected** to the chat interface
+2. **Click "Start Your Dating Journey"** to validate and proceed
+3. **Get redirected** to the dashboard with both features
 
-### Chat Interface
+### Dashboard Features
 
-1. **Select an AI model** from the dropdown menu
-2. **Type your message** in the text area
-3. **Press Enter** to send (or Shift+Enter for new line)
-4. **Wait for the AI response** with loading indicators
-5. **Copy responses** using the copy button
-6. **Switch models** anytime during your conversation
+#### Dating Coach Tab
+1. **Select an AI personality** from the 5 available options
+2. **Ask questions** about dating, relationships, or attraction
+3. **Get personalized advice** based on your chosen mindset
+4. **Copy responses** using the copy button
+5. **View conversation history** of all coaching sessions
 
-### Features
+#### Reply Generator Tab
+1. **Add people** using the + button in the sidebar
+2. **Select a person** from the conversation list
+3. **Paste their message** in the input field
+4. **Choose your personality** in settings
+5. **Generate a reply** that matches your dating approach
+6. **View conversation history** with text message UI
 
-- **Model Switching**: Change AI models anytime during your conversation
-- **Dark Mode**: Toggle between light and dark themes using the moon/sun icon
-- **Copy Responses**: Click the copy icon on any AI response to copy it to clipboard
-- **Clear History**: Use the "Clear History" button in settings to start fresh
-- **Persistent Storage**: Your conversations are automatically saved and restored
-- **Settings Panel**: Access via the gear icon to manage API keys and preferences
-- **Logout**: Use the logout button to clear your API key and return to landing page
+### AI Personalities
+
+| Personality | Description | Best For |
+|-------------|-------------|----------|
+| **Long Term (Marry Her)** | Focused on building serious, committed relationships | Marriage-minded dating |
+| **Go With The Flow** | Casual, natural dating approach | Organic relationship development |
+| **Short Term** | Meaningful but not long-term relationships | Quality short-term connections |
+| **Hookup** | Casual physical relationships | Clear boundaries, mutual consent |
+| **One Night Stand** | Single encounter relationships | One-time experiences |
 
 ## 🏗️ Architecture
 
@@ -103,12 +112,14 @@ A modern, responsive AI chat application built with **Next.js 14**, React, and T
 - **TypeScript**: Full type safety throughout the application
 - **Tailwind CSS**: Utility-first CSS framework for styling
 - **Lucide Icons**: Beautiful, consistent iconography
-- **Local Storage**: Browser-based storage for conversation history
+- **Local Storage**: Browser-based storage for all data
 - **Responsive Design**: Mobile-first approach with Tailwind breakpoints
 
 ### Backend (API Routes)
 - **Next.js API Routes**: Serverless API endpoints
-- **OpenRouter Integration**: Unified API for multiple LLM providers
+- **OpenRouter Integration**: Unified API for multiple free LLM providers
+- **Personality System**: 5 different AI personalities with specialized prompts
+- **Reply Generation**: Contextual reply generation for conversations
 - **Error Handling**: Comprehensive error handling and user feedback
 - **Type Safety**: Full TypeScript support for API responses
 
@@ -116,37 +127,33 @@ A modern, responsive AI chat application built with **Next.js 14**, React, and T
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/chat` | POST | Send a message and get AI response |
-| `/api/models` | GET | Get list of available AI models |
+| `/api/chat` | POST | Get AI dating coach advice with personality |
+| `/api/reply` | POST | Generate contextual replies for conversations |
+| `/api/models` | GET | Get list of available free AI models |
 
 ## 🎨 Customization
 
 ### Styling
-The application uses Tailwind CSS for styling. You can customize the appearance by modifying the Tailwind configuration in `tailwind.config.js`:
+The application uses Tailwind CSS for styling. You can customize the appearance by modifying the Tailwind configuration in `tailwind.config.js`.
 
-```javascript
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        primary: {
-          // Add your custom colors here
-        }
-      }
-    }
-  }
-}
-```
-
-### Adding New Models
-To add support for new AI models, update the `DEFAULT_MODELS` array in `lib/utils.ts`:
+### Adding New Personalities
+To add new AI personalities, update the `AI_PERSONALITIES` array in `lib/personalities.ts`:
 
 ```typescript
-export const DEFAULT_MODELS = [
-  // Add your new model here
-  { id: 'provider/model-name', name: 'Display Name', provider: 'Provider' }
+export const AI_PERSONALITIES: AIPersonality[] = [
+  // Add your new personality here
+  {
+    id: 'your-personality',
+    name: 'Your Personality',
+    description: 'Description of the personality',
+    color: 'from-color-500 to-color-600',
+    systemPrompt: 'Your system prompt here...'
+  }
 ]
 ```
+
+### Customizing AI Behavior
+To modify how the AI acts, edit the system prompts in `lib/personalities.ts` or the API routes in `app/api/chat/route.ts` and `app/api/reply/route.ts`.
 
 ## 🚀 Deployment
 
@@ -164,81 +171,36 @@ npm start      # Starts production server
 ### Deployment Platforms
 
 #### Vercel (Recommended)
-1. Connect your repository to Vercel
-2. Deploy automatically on push
-3. Set environment variables in Vercel dashboard if needed
-
-#### Netlify
-1. Connect your repository to Netlify
-2. Set build command: `npm run build`
-3. Set publish directory: `.next`
-4. Deploy automatically on push
-
-#### Railway
-1. Connect your repository to Railway
-2. Set environment variables
+1. Push your code to GitHub
+2. Connect your repository to Vercel
 3. Deploy automatically
 
-### Environment Variables for Production
-Make sure to set these in your deployment platform if needed:
-- `OPENROUTER_API_KEY` (optional - users can provide their own)
-- `NODE_ENV=production`
+#### Other Platforms
+The app can be deployed to any platform that supports Next.js:
+- Netlify
+- Railway
+- DigitalOcean App Platform
+- AWS Amplify
 
-## 🔒 Security
+## 🔧 Environment Variables
 
-- API keys are stored securely in browser localStorage
-- No sensitive data is exposed in the frontend code
-- API key validation before accessing chat features
-- Secure API communication with OpenRouter
-- Input validation and sanitization implemented
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**"Invalid API key" error**
-- Verify your OpenRouter API key is correct
-- Check that the key starts with "sk-"
-- Ensure the key has sufficient credits/quota
-
-**"Failed to load models" error**
-- Check your internet connection
-- Verify the OpenRouter API is accessible
-- The app will fall back to default models if the API is unavailable
-
-**Messages not saving**
-- Check if localStorage is enabled in your browser
-- Clear browser cache and try again
-- Ensure you're not in incognito/private browsing mode
-
-**Server won't start**
-- Verify Node.js version (v18+ required)
-- Check if port 3000 is already in use
-- Ensure all dependencies are installed
-
-### Getting Help
-
-1. Check the browser console for error messages
-2. Verify your OpenRouter API key is valid
-3. Test the API connection using the models endpoint
-4. Check the server logs for detailed error information
+| Variable | Description | Required | Default |
+|----------|-------------|----------|---------|
+| `OPENROUTER_API_KEY` | Your OpenRouter API key (optional - users can provide their own) | No | - |
+| `NODE_ENV` | Environment mode | No | development |
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is open source and available under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 🙏 Acknowledgments
+## 📞 Support
 
-- [OpenRouter](https://openrouter.ai) for providing access to multiple AI models
-- [Next.js](https://nextjs.org) for the amazing React framework
-- [React](https://reactjs.org) for the frontend library
-- [Tailwind CSS](https://tailwindcss.com) for the styling framework
-- [Lucide](https://lucide.dev) for the beautiful icons
+If you have any questions or need help, please open an issue on GitHub.
 
 ---
 
-**Happy chatting with Wingman AI! 🚀** 
+**Note**: This app uses only free AI models via OpenRouter, so users won't incur any charges when using the service. 

@@ -1,15 +1,19 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Wingman AI - Your AI Conversation Partner',
-  description: 'A modern AI chat application with support for multiple language models via OpenRouter',
-  keywords: ['AI', 'chat', 'OpenRouter', 'LLM', 'conversation'],
+  title: 'Wingman AI - Your AI Dating Coach & Reply Generator',
+  description: 'Get personalized dating advice, conversation starters, and relationship strategies from your AI wingman. Learn how to attract, connect, and build meaningful relationships.',
+  keywords: ['dating', 'relationships', 'dating coach', 'AI wingman', 'attraction', 'confidence', 'OpenRouter'],
   authors: [{ name: 'Wingman AI' }],
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
